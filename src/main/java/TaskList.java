@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 
-public class DisplayList {
-    ArrayList<String> list = new ArrayList<>();
+public class TaskList {
+    private ArrayList<Task> list = new ArrayList<>();
 
-    public void add(String input) {
+    public void add(Task input) {
         list.add(input);
+    }
+
+    public Task getTask(int i) {
+        return list.get(i - 1);
     }
 
     @Override
