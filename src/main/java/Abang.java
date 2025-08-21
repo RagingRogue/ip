@@ -6,6 +6,7 @@ public class Abang {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
+        DisplayList list = new DisplayList();
 
         while(true) {
             String input = sc.nextLine();
@@ -15,7 +16,13 @@ public class Abang {
                 break;
             }
 
-            System.out.println(input);
+            if(input.equals("list")) {
+                System.out.println(list);
+                continue;
+            }
+
+            list.add(input);
+            System.out.println("added: " + input);
 
         }
     }
