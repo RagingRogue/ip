@@ -11,6 +11,10 @@ public class TaskList {
         return list.get(i - 1);
     }
 
+    public int numTask() {
+        return list.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
