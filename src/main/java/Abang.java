@@ -9,27 +9,44 @@ public class Abang {
         TaskList tasklist = new TaskList();
 
         while (true) {
-            String input = sc.nextLine();
-
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon.");
-                break;
-            }
-
-            if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                System.out.println(tasklist);
-                continue;
-            }
-
-            if (input.isEmpty()) {
-                System.out.println("Hey! You typed nothing. Please enter a command.");
-                continue;
-            }
 
             try {
+                String input = sc.nextLine();
+
+                if (input.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon.");
+                    break;
+                }
+
+                if (input.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    System.out.println(tasklist);
+                    continue;
+                }
+
+                if (input.isEmpty()) {
+                    throw new AbangException("Hey! You typed nothing. Please enter a command.");
+                }
+
                 String[] inputArray = input.split(" ", 2);
                 String word1 = inputArray[0];
+
+                if (word1.equals("delete")) {
+                    if (inputArray.length < 2) {
+                        throw new AbangException("Please provide a task number to delete");
+                    }
+                    String number = input.split(" ", 2)[1];
+                    int index = Integer.parseInt(number);
+                    if (index > tasklist.numTask()) {
+                        throw new AbangException("Please key in a valid number");
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + tasklist.getTask(index));
+                    tasklist.remove(index);
+                    int numTask = tasklist.numTask();
+                    System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+                    continue;
+                }
 
                 if (word1.equals("mark")) {
                     if (inputArray.length < 2) {

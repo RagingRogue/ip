@@ -7,6 +7,10 @@ public class TaskList {
         list.add(input);
     }
 
+    public void remove(int index) {
+        list.remove(index);
+    }
+
     public Task getTask(int i) {
         return list.get(i - 1);
     }
