@@ -8,7 +8,7 @@ public class TaskList {
     }
 
     public void remove(int index) {
-        list.remove(index);
+        list.remove(index -1);
     }
 
     public Task getTask(int i) {
@@ -27,6 +27,48 @@ public class TaskList {
             sb.append(i + 1).append(". ").append(list.get(i)).append("\n");
         }
         return sb.toString();
+    }
+
+    public ArrayList<String> toFileLines() {
+        ArrayList<String> fileLines = new ArrayList<String>();
+        for (Task t: list) {
+            fileLines.add(t.toFileFormat());
+        }
+        return fileLines;
+    }
+
+    public static TaskList fromFileLines(ArrayList<String> fileLines) {
+        TaskList taskList = new TaskList();
+        for (String line : fileLines) {
+                String[] parts = line.split(" \\| ");
+                String type = parts[0];
+                boolean isDone = parts[1].equals("1");
+                String description = parts[2];
+                Task task;
+                switch (type) {
+                    case "T":
+                        task = new ToDo(description);
+                        break;
+                    case "D":
+                        task = new Deadline(description, parts[3]);
+                        break;
+                    case "E":
+                        String text = parts[3];
+                        text = text.replace("(", "").replace(")", "");
+                        String[] components = text.split("to:");
+                        String start = components[0].replace("from:", "").trim();
+                        String end = components[1].trim();
+                        task = new Event(description, start, end);
+                        break;
+                    default:
+                        continue;
+                }
+                if (isDone) {
+                    task.done();
+                }
+                taskList.add(task);
+        }
+        return taskList;
     }
 
 

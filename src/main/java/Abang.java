@@ -5,13 +5,22 @@ public class Abang {
         System.out.println("Hello! I'm Abang!");
         System.out.println("What can I do for you?");
 
+
         Scanner sc = new Scanner(System.in);
-        TaskList tasklist = new TaskList();
+        Storage storage = new Storage();
+        TaskList tasklist = storage.load();
 
         while (true) {
 
             try {
                 String input = sc.nextLine();
+
+                if (input.equals("clear")) {
+                    System.out.println("Cleared all tasks");
+                    tasklist = new TaskList();
+                    System.out.println(tasklist);
+                    continue;
+                }
 
                 if (input.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon.");
@@ -45,6 +54,7 @@ public class Abang {
                     tasklist.remove(index);
                     int numTask = tasklist.numTask();
                     System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+                    storage.save(tasklist.toFileLines());
                     continue;
                 }
 
@@ -61,6 +71,7 @@ public class Abang {
                     task.done();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + task);
+                    storage.save(tasklist.toFileLines());
                     continue;
                 }
 
@@ -78,6 +89,7 @@ public class Abang {
                     task.notDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + task);
+                    storage.save(tasklist.toFileLines());
                     continue;
                 }
 
@@ -92,6 +104,7 @@ public class Abang {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(task);
                     System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+                    storage.save(tasklist.toFileLines());
                     continue;
                 }
 
@@ -109,6 +122,7 @@ public class Abang {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(task);
                     System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+                    storage.save(tasklist.toFileLines());
                     continue;
                 }
 
@@ -127,6 +141,7 @@ public class Abang {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(task);
                     System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+                    storage.save(tasklist.toFileLines());
                 } else {
                     throw new AbangException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
