@@ -1,3 +1,11 @@
+package abang;
+
+import abang.ui.UI;
+import abang.storage.Storage;
+import abang.task.TaskList;
+import abang.command.Command;
+import abang.parser.Parser;
+import abang.exception.AbangException;
 import java.io.IOException;
 
 public class Abang {

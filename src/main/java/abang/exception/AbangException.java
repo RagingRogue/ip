@@ -1,5 +1,7 @@
+package abang.exception;
+
 public class AbangException extends Exception{
-    AbangException(String m) {
+    public AbangException(String m) {
         super(m);
     }
 }

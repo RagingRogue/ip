@@ -1,4 +1,6 @@
-abstract class Task {
+package abang.task;
+
+public abstract class Task {
     private boolean finished;
     private String taskDescription;
     public abstract String toFileFormat();
