@@ -110,7 +110,7 @@ public class Abang {
 
                 if (word1.equals("deadline")) {
                     String description = inputArray[1];
-                    String[] details = description.split("/");
+                    String[] details = description.split("/", 2);
                     if(details.length != 2) {
                         throw new AbangException("Please key in valid Deadline Task description");
                     }
@@ -128,13 +128,11 @@ public class Abang {
 
                 if (word1.equals("event")) {
                     String description = inputArray[1];
-                    String[] details = description.split("/");
-                    if(details.length != 3) {
-                        throw new AbangException("Please key in valid Deadline Task description");
-                    }
-                    String name = details[0];
-                    String start = (details[1].split(" ", 2))[1];
-                    String end = (details[2].split(" ", 2))[1];
+                    String[] details = description.split("/from");
+                    String name = details[0].trim();
+                    String[] timing = details[1].split("/to");
+                    String start = (timing[0].split(" ", 2))[1].trim();
+                    String end = (timing[1].split(" ", 2))[1].trim();
                     Task task = new Event(name, start, end);
                     tasklist.add(task);
                     int numTask = tasklist.numTask();
