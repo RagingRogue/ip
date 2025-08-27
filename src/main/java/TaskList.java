@@ -19,6 +19,20 @@ public class TaskList {
         return list.size();
     }
 
+    public void mark(int index) {
+        Task task = list.get(index -1);
+        task.done();
+    }
+
+    public void clear() {
+        list.clear();
+    }
+
+    public void unmark(int index) {
+        Task task = list.get(index -1);
+        task.notDone();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
