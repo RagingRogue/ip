@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a event task with a description and a specific start and end.
+ * The start and end may be stored as either a LocalDate, a LocalDateTime,
+ * or as a free-text detail string if parsing fails.
+ */
 public class Event extends Task {
     String start;
     String end;
@@ -19,7 +24,19 @@ public class Event extends Task {
     private static final DateTimeFormatter PARSE_DATE = DateTimeFormatter.ofPattern("d/M/yyyy");
     private static final DateTimeFormatter PARSE_DATETIME = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
-
+    /**
+     * Creates a Event task with the given description and detail.
+     * <p>
+     * The start string is first attempted to be parsed as a date (d/M/yyyy).
+     * If that fails, it is attempted to be parsed as a date and time (d/M/yyyy HHmm).
+     * If both parsing attempts fail, the detail is stored as a free-text string.
+     *
+     * The end string is parsed in the same way
+     *
+     * @param description the description of the task
+     * @param start    the start detail as a string
+     * @param end      the end detail as a string
+     */
     public Event(String description, String start, String end) {
         super(description);
 
@@ -44,6 +61,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of this event task,
+     * including the formatted start and end times.
+     *
+     * @return the string representation of the event task
+     */
     @Override
     public String toString() {
         String startStr;
@@ -68,6 +91,12 @@ public class Event extends Task {
                 String.format(" (from: %s to: %s)", startStr, endStr);
     }
 
+    /**
+     * Returns the file format representation of this event task,
+     * used for saving to persistent storage.
+     *
+     * @return the event task as a string suitable for file saving
+     */
     @Override
     public String toFileFormat() {
 

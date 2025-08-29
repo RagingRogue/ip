@@ -6,6 +6,10 @@ import abang.task.*;
 
 
 public class Parser {
+
+    /**
+    * Parses the given input string and returns the corresponding {@link Command}.
+    */
     public static Command parse(String input) throws AbangException {
 
         if (input.equals("clear")) {
