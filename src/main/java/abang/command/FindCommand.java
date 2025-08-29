@@ -5,20 +5,38 @@ import abang.storage.Storage;
 import abang.task.TaskList;
 import abang.ui.UI;
 
+/**
+ * Represents a command to find tasks containing a given keyword.
+ */
 public class FindCommand extends Command {
     private String[] inputArray;
 
+    /**
+     * Creates a FindCommand with the given input array.
+     *
+     * @param inputArray the parsed user input split into words
+     */
     public FindCommand(String[] inputArray) {
         this.inputArray = inputArray;
     }
 
+    /**
+     * Executes the find command by searching the task list for tasks
+     * that contain the given keyword and printing the results.
+     *
+     * @param taskList the current task list
+     * @param ui       the UI object for interaction
+     * @param storage  the storage object for saving tasks
+     * @throws AbangException if no keyword is provided
+     */
+    @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
-        String keyWord = inputArray[1];
-        TaskList foundList = taskList.find(keyWord);
-        if (foundList.isEmpty()) {
-            System.out.println("Unable to find");
-        } else {
-            System.out.println(foundList);
+        if (inputArray.length < 2) {
+            throw new AbangException("Please provide a keyword to find.");
         }
+        String keyword = inputArray[1];
+        TaskList results = taskList.find(keyword);
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(results);
     }
 }

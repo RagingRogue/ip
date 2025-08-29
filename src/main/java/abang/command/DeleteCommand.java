@@ -5,14 +5,31 @@ import abang.ui.UI;
 import abang.storage.Storage;
 import abang.exception.AbangException;
 
-
+/**
+ * Represents a command to delete a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private String[] inputArray;
 
+    /**
+     * Creates a DeleteCommand with the given input array.
+     *
+     * @param inputArray the parsed user input split into words
+     */
     public DeleteCommand(String[] inputArray) {
         this.inputArray = inputArray;
     }
 
+    /**
+     * Executes the delete command by removing the specified task
+     * from the task list and saving the updated list to storage.
+     *
+     * @param taskList the current task list
+     * @param ui       the UI object for interaction
+     * @param storage  the storage object for saving tasks
+     * @throws AbangException if the task index is invalid
+     */
+    @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
         int index = Integer.parseInt(inputArray[1]);
         if (index < 1 || index > taskList.numTask()) {
