@@ -39,6 +39,10 @@ public class Parser {
             return new UnmarkCommand(inputArray);
         }
 
+        if (word1.equals("find")) {
+            return new FindCommand(inputArray);
+        }
+
         if (word1.equals("todo")) {
             if (inputArray.length < 2) {
                 throw new AbangException("OOPS!!! The description of a todo cannot be empty.");

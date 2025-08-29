@@ -10,6 +10,18 @@ public abstract class Task {
         this.taskDescription = description;
     }
 
+    public boolean contain(String word) {
+        String[] words = taskDescription.split(" ");
+        boolean found = false;
+        for (String key : words) {
+            if (key.equals(word)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
     public String getTaskDescription() {
         return this.taskDescription;
     }

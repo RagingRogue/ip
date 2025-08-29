@@ -1,9 +1,26 @@
 package abang.task;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
+
+    public TaskList() {
+    }
+
+    public TaskList(ArrayList<Task> arrayList) {
+        this.list = arrayList;
+    }
+
+    public TaskList(List<Task> tasks) {
+        this.list = new ArrayList<>(tasks);
+    }
+
     private ArrayList<Task> list = new ArrayList<>();
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 
     public void add(Task input) {
         list.add(input);
@@ -19,6 +36,14 @@ public class TaskList {
 
     public int numTask() {
         return list.size();
+    }
+
+    public TaskList find(String word) {
+        List<Task> matched = list.stream()
+                .filter(t -> t.getTaskDescription().contains(word))
+                .toList();
+
+        return new TaskList(new ArrayList<>(matched));
     }
 
     public void mark(int index) {
