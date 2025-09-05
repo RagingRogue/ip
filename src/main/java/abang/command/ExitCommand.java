@@ -19,9 +19,10 @@ public class ExitCommand extends Command {
      * @param storage  the storage object for saving tasks
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException{
-        System.out.println("Thank you and have a good day!");
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
+        return "Thank you and have a good day!";
     }
+
     public boolean isExit() {
         return true;
     }

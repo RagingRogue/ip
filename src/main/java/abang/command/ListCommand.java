@@ -18,8 +18,11 @@ public class ListCommand extends Command {
      * @param storage  the storage object for saving tasks
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException{
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(taskList);
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+        sb.append(taskList);
+        return sb.toString();
     }
+
 }

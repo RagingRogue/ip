@@ -30,16 +30,22 @@ public class DeleteCommand extends Command {
      * @throws AbangException if the task index is invalid
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
         int index = Integer.parseInt(inputArray[1]);
         if (index < 1 || index > taskList.numTask()) {
             throw new AbangException("Please key in valid number");
         }
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + taskList.getTask(index));
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n");
+        sb.append("  ").append(taskList.getTask(index)).append("\n");
+
         taskList.remove(index);
         int numTask = taskList.numTask();
-        System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+        sb.append(String.format("Now you have %d tasks in the list.", numTask));
+
         storage.save(taskList.toFileLines());
+        return sb.toString();
     }
+
 }

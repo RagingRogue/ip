@@ -8,10 +8,14 @@ import abang.exception.AbangException;
 
 public class ClearCommand extends Command{
 
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException{
-        System.out.println("Cleared all tasks");
+    @Override
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cleared all tasks\n");
         taskList.clear();
-        System.out.println(taskList);
+        sb.append(taskList);
         storage.save(taskList.toFileLines());
+        return sb.toString();
     }
+
 }

@@ -29,11 +29,21 @@ public class Abang {
             try {
                 String Command = ui.readCommand();
                 Command c = Parser.parse(Command);
-                c.execute(taskList, ui, storage);
+                String result = c.execute(taskList, ui, storage);
+                System.out.println(result);
                 isExit = c.isExit();
             } catch (AbangException e) {
                 System.out.println("Error: " + e.getMessage());
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (AbangException e) {
+            return "Error: " + e.getMessage();
         }
     }
 

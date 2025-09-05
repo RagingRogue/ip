@@ -30,13 +30,17 @@ public class FindCommand extends Command {
      * @throws AbangException if no keyword is provided
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
         if (inputArray.length < 2) {
             throw new AbangException("Please provide a keyword to find.");
         }
         String keyword = inputArray[1];
         TaskList results = taskList.find(keyword);
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(results);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        sb.append(results);
+        return sb.toString();
     }
+
 }

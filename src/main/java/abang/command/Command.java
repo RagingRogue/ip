@@ -22,5 +22,5 @@ public abstract class Command {
      * @param storage  the storage object for saving tasks
      * @throws AbangException if the command cannot be executed
      */
-    public abstract void execute(TaskList taskList, UI ui, Storage storage) throws AbangException;
+    public abstract String execute(TaskList taskList, UI ui, Storage storage) throws AbangException;
 }

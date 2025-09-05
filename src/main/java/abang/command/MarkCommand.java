@@ -30,7 +30,7 @@ public class MarkCommand extends Command{
      * @throws AbangException if the task index is invalid
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException{
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
         if (inputArray.length < 2) {
             throw new AbangException("Please provide a task number to mark");
         }
@@ -39,9 +39,15 @@ public class MarkCommand extends Command{
         if (index < 1 || index > taskList.numTask()) {
             throw new AbangException("Please key in a valid number");
         }
+
         taskList.mark(index);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + taskList.getTask(index));
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append("  ").append(taskList.getTask(index));
+
         storage.save(taskList.toFileLines());
+        return sb.toString();
     }
+
 }

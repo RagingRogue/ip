@@ -11,12 +11,13 @@ import abang.exception.AbangException;
  */
 public class AddCommand extends Command {
     Task task;
+
     /**
      * Creates an AddCommand with the given task.
      *
      * @param task the task to add
      */
-    public AddCommand(Task task){
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -28,13 +29,18 @@ public class AddCommand extends Command {
      * @param ui       the UI object for interaction
      * @param storage  the storage object for saving tasks
      */
+    
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws AbangException{
+    public String execute(TaskList taskList, UI ui, Storage storage) throws AbangException {
         taskList.add(this.task);
         int numTask = taskList.numTask();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %d tasks in the list.", numTask));
+
+        String msg = "Got it. I've added this task:\n"
+                + this.task + "\n"
+                + String.format("Now you have %d tasks in the list.", numTask);
+
         storage.save(taskList.toFileLines());
+        return msg;
     }
 }
+
