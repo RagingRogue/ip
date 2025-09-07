@@ -77,7 +77,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the status of the task as an icon for file storage.
+     * Returns the status of the task as icon for file storage.
      */
     public String getStatusIcon() {
         return (finished ? "1" : "0");
