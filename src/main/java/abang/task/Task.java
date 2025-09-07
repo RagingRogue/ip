@@ -1,5 +1,9 @@
 package abang.task;
 
+/**
+ * Represents a generic task with a description and completion status.
+ * <p>
+ */
 public abstract class Task {
     private boolean finished;
     private String taskDescription;
