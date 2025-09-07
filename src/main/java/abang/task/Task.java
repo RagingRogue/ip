@@ -5,10 +5,26 @@ package abang.task;
  * <p>
  */
 public abstract class Task {
+    /** Whether the task is finished (true) or not (false). */
     private boolean finished;
+
+    /** The description of the task. */
     private String taskDescription;
+
+    /**
+     * Converts the task into a format suitable for file saving.
+     *
+     * @return the string representation of the task in file format
+     */
     public abstract String toFileFormat();
 
+
+    /**
+     * Constructs a task with the given description.
+     * By default, the task is marked as not done.
+     *
+     * @param description the description of the task
+     */
     public Task(String description) {
         this.finished = false;
         this.taskDescription = description;
