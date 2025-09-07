@@ -42,23 +42,43 @@ public abstract class Task {
         return found;
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return the task description
+     */
     public String getTaskDescription() {
         return this.taskDescription;
     }
 
+    /**
+     * Marks the task as completed.
+     */
     public void done() {
         this.finished = true;
     }
 
+    /**
+     * Marks the task as not completed.
+     */
     public void notDone() {
         this.finished = false;
     }
 
+    /**
+     * Returns a string representation of the task,
+     * showing its status icon and description.
+     *
+     * @return a string representation of the task
+     */
     @Override
     public String toString() {
         return (this.finished == true ? "[X] " : "[ ] ") + taskDescription;
     }
 
+    /**
+     * Returns the status of the task as an icon for file storage.
+     */
     public String getStatusIcon() {
         return (finished ? "1" : "0");
     }
