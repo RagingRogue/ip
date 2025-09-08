@@ -32,7 +32,7 @@ public class Abang {
                 String result = c.execute(taskList, ui, storage);
                 System.out.println(result);
                 isExit = c.isExit();
-            } catch (AbangException e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }

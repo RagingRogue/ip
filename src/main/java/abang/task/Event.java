@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  * Represents a event task with a description and a specific start and end.
@@ -118,7 +119,8 @@ public class Event extends Task {
             endStr = end;
         }
 
-        return "E | " + getStatusIcon() + " | " + getTaskDescription() +
+        return "E | " + getStatusIcon() + " | " + getTaskDescription() + " | " +
+                (Objects.isNull(this.getTag()) ? "null" : this.getTag().split("#")[1]) +
                 " | from: " + startStr + " to: " + endStr;
     }
 

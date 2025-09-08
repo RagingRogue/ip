@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  * Represents a deadline task with a description and a specific deadline.
@@ -72,13 +73,13 @@ public class Deadline extends Task {
     @Override
     public String toFileFormat() {
         if (deadline != null) {
-            return "D | " + getStatusIcon() + " | " + getTaskDescription() + " | " + deadline;
+            return "D | " + getStatusIcon() + " | " + getTaskDescription() + " | " + (Objects.isNull(this.getTag()) ? "null" : this.getTag().split("#")[1]) + " | " + deadline;
         }
         if (deadlineTime != null) {
-            return "D | " + getStatusIcon() + " | " + getTaskDescription() + " | " + deadlineTime;
+            return "D | " + getStatusIcon() + " | " + getTaskDescription() + " | " + (Objects.isNull(this.getTag()) ? "null" : this.getTag().split("#")[1]) + " | " + deadlineTime;
         }
         else {
-            return "D | " + getStatusIcon() + " | " + getTaskDescription() + " | " + detail;
+            return "D | " + getStatusIcon() + " | " + getTaskDescription() + " | " + (Objects.isNull(this.getTag()) ? "null" : this.getTag().split("#")[1]) + " | " + detail;
         }
     }
 }

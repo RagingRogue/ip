@@ -1,5 +1,7 @@
 package abang.task;
 
+import java.util.Objects;
+
 /**
  * Represents a simple todo task with only a description.
  */
@@ -32,7 +34,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "T | " + getStatusIcon() + " | " + getTaskDescription();
+        return "T | " + getStatusIcon() + " | " + getTaskDescription() + " | " + (Objects.isNull(this.getTag()) ? "null" : this.getTag().split("#")[1]);
     }
 
 }

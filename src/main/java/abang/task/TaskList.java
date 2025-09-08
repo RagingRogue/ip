@@ -56,6 +56,10 @@ public class TaskList {
         list.add(input);
     }
 
+    public void tag(int index, String tagDescription) {
+        this.list.get(index -1).tag(tagDescription);
+    }
+
 
     /**
      * Removes a task from the list by its 1-based index.
@@ -173,21 +177,31 @@ public class TaskList {
                 String type = parts[0];
                 boolean isDone = parts[1].equals("1");
                 String description = parts[2];
+                String tagLine = parts[3];
                 Task task;
                 switch (type) {
                     case "T":
                         task = new ToDo(description);
+                        if (!tagLine.equals("null")) {
+                            task.tag(tagLine);
+                        }
                         break;
                     case "D":
-                        task = new Deadline(description, parts[3]);
+                        task = new Deadline(description, parts[4]);
+                        if (!tagLine.equals("null")) {
+                            task.tag(tagLine);
+                        }
                         break;
                     case "E":
-                        String text = parts[3];
+                        String text = parts[4];
                         text = text.replace("(", "").replace(")", "");
                         String[] components = text.split("to:");
                         String start = components[0].replace("from:", "").trim();
                         String end = components[1].trim();
                         task = new Event(description, start, end);
+                        if (!tagLine.equals("null")) {
+                            task.tag(tagLine);
+                        }
                         break;
                     default:
                         continue;

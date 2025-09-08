@@ -47,6 +47,10 @@ public class Parser {
             return new FindCommand(inputArray);
         }
 
+        if (word1.equals("tag")) {
+            return new TagCommand(inputArray);
+        }
+
         if (word1.equals("todo")) {
             if (inputArray.length < 2) {
                 throw new AbangException("OOPS!!! The description of a todo cannot be empty.");
@@ -59,7 +63,9 @@ public class Parser {
         if (word1.equals("deadline")) {
             String description = inputArray[1];
             String[] details = description.split("/", 2);
-            if (details.length != 2) {
+            if (details.length < 2
+                    || details[0].trim().isEmpty()
+                    || details[1].trim().isEmpty()) {
                 throw new AbangException("Please key in valid Deadline Task description");
             }
             String name = details[0];

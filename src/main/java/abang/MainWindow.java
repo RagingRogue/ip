@@ -1,4 +1,6 @@
 package abang;
+
+import abang.ui.UI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +27,10 @@ public class MainWindow {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
         abangImage = new Image(this.getClass().getResourceAsStream("/images/DaAbang.png"));
+
+        dialogContainer.getChildren().add(
+                DialogBox.getAbangDialog(UI.showWelcome(), abangImage)
+        );
     }
 
     public void setAbang(Abang a) {

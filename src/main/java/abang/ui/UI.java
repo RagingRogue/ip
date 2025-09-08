@@ -21,16 +21,8 @@ public class UI {
     /**
      * Displays the welcome message when the program starts.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Abang!");
-        System.out.println("What can I do for you?");
-    }
-
-    /**
-     * Displays the farewell message when the program exits.
-     */
-    public void showFarewell() {
-        System.out.println("Bye. Hope to see you again soon.");
+    public static String showWelcome() {
+        return "Hello! I'm Abang\nWhat can I do for you?";
     }
 
     /**

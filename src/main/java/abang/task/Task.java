@@ -1,5 +1,6 @@
 package abang.task;
 
+import java.util.Objects;
 /**
  * Represents a generic task with a description and completion status.
  * <p>
@@ -10,6 +11,8 @@ public abstract class Task {
 
     /** The description of the task. */
     private String taskDescription;
+
+    private String tag;
 
     /**
      * Converts the task into a format suitable for file saving.
@@ -28,6 +31,14 @@ public abstract class Task {
     public Task(String description) {
         this.finished = false;
         this.taskDescription = description;
+    }
+
+    public String getTag() {
+        return this.tag;
+    }
+
+    public void tag(String tag) {
+        this.tag = "#" + tag;
     }
 
     public boolean contain(String word) {
@@ -73,7 +84,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (this.finished == true ? "[X] " : "[ ] ") + taskDescription;
+        return (this.finished == true ? "[X] " : "[ ] ") + String.format("[%s]", Objects.isNull(this.tag) ? "" : this.tag ) + taskDescription;
     }
 
     /**
