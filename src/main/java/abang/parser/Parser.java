@@ -11,6 +11,7 @@ public class Parser {
     * Parses the given input string and returns the corresponding {@link Command}.
     */
     public static Command parse(String input) throws AbangException {
+        assert input != null : "input must not be null";
 
         if (input.equals("clear")) {
             return new ClearCommand();
@@ -29,12 +30,14 @@ public class Parser {
         }
 
         String[] inputArray = input.split(" ", 2);
+        assert inputArray.length >= 1 : "split must produce at least one token";
 
         if (inputArray.length < 2) {
             throw new AbangException("Please key in valid command description");
         }
 
         String word1 = inputArray[0];
+        assert word1 != null && !word1.isBlank() : "command word must be non-blank";
 
         if (word1.equals("delete")) {
             return new DeleteCommand(inputArray);
