@@ -56,6 +56,12 @@ public class TaskList {
         list.add(input);
     }
 
+    /**
+     * Tag a task with the corresponding index with its description
+     * @param index
+     * @param tagDescription
+     */
+
     public void tag(int index, String tagDescription) {
         this.list.get(index -1).tag(tagDescription);
     }
