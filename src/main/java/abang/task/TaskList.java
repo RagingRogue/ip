@@ -18,6 +18,8 @@ public class TaskList {
      * Constructs an empty TaskList.
      */
     public TaskList() {
+        assert list != null : "Internal list must be initialized";
+        assert list.isEmpty() : "New TaskList should start empty";
     }
 
     /**
@@ -26,7 +28,9 @@ public class TaskList {
      * @param arrayList the ArrayList of tasks to initialize with
      */
     public TaskList(ArrayList<Task> arrayList) {
+        assert arrayList != null : "arrayList must not be null";
         this.list = arrayList;
+        assert this.list != null : "list must not be null after assignment";
     }
 
     /**
@@ -35,7 +39,9 @@ public class TaskList {
      * @param tasks the list of tasks to initialize with
      */
     public TaskList(List<Task> tasks) {
+        assert tasks != null : "tasks must not be null";
         this.list = new ArrayList<>(tasks);
+        assert this.list != null : "list must not be null after copy";
     }
 
     /**
@@ -44,6 +50,7 @@ public class TaskList {
      * @return {@code true} if the list contains no tasks, otherwise {@code false}
      */
     public boolean isEmpty() {
+        assert list != null : "list must exist";
         return list.isEmpty();
     }
 
@@ -53,7 +60,10 @@ public class TaskList {
      * @param input the task to be added
      */
     public void add(Task input) {
+        assert input != null : "Cannot add null Task";
+        int before = list.size();
         list.add(input);
+        assert list.size() == before + 1 : "Size should increase by one after add";
     }
 
     public void tag(int index, String tagDescription) {
