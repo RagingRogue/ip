@@ -24,10 +24,13 @@ public class Storage {
      * If the parent directory/file does not exist, they will be created.
      */
     public Storage() {
+        assert FILE_PATH != null && !FILE_PATH.isBlank();
+
         try {
             File file = new File(FILE_PATH);
             file.getParentFile().mkdir();
             file.createNewFile();
+            assert file.isFile() : "Storage target must be a file";
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }

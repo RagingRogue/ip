@@ -29,6 +29,11 @@ public class Parser {
         }
 
         String[] inputArray = input.split(" ", 2);
+
+        if (inputArray.length < 2) {
+            throw new AbangException("Please key in valid command description");
+        }
+
         String word1 = inputArray[0];
 
         if (word1.equals("delete")) {
@@ -61,26 +66,58 @@ public class Parser {
         }
 
         if (word1.equals("deadline")) {
-            String description = inputArray[1];
-            String[] details = description.split("/", 2);
-            if (details.length < 2
-                    || details[0].trim().isEmpty()
-                    || details[1].trim().isEmpty()) {
+            if (inputArray.length < 2 || inputArray[1].trim().isEmpty()) {
                 throw new AbangException("Please key in valid Deadline Task description");
             }
-            String name = details[0];
-            String deadline = (details[1].split(" ", 2))[1];
+
+            String description = inputArray[1];
+
+            String[] details = description.split("/by", 2);
+            if (details.length != 2) {
+                throw new AbangException("Please key in valid Deadline Task description (use '/by <time>')");
+            }
+            if (details[0].trim().isEmpty()) {
+                throw new AbangException("Deadline name cannot be empty");
+            }
+            if (details[1].trim().isEmpty()) {
+                throw new AbangException("Deadline time cannot be empty");
+            }
+
+            String name = details[0].trim();
+            String deadline = details[1].trim();
+
             Task task = new Deadline(name, deadline);
             return new AddCommand(task);
         }
 
         if (word1.equals("event")) {
+            if (inputArray.length < 2 || inputArray[1].trim().isEmpty()) {
+                throw new AbangException("Please key in valid Event Task description");
+            }
+
             String description = inputArray[1];
-            String[] details = description.split("/from");
+
+            String[] details = description.split("/from", 2);
+            if (details.length != 2) {
+                throw new AbangException("Please key in valid Event Task description (use '/from <start> /to <end>')");
+            }
+            if (details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
+                throw new AbangException("Please key in valid Event Task description");
+            }
+
             String name = details[0].trim();
-            String[] timing = details[1].split("/to");
-            String start = (timing[0].split(" ", 2))[1].trim();
-            String end = (timing[1].split(" ", 2))[1].trim();
+
+            String[] timing = details[1].split("/to", 2);
+            if (timing.length != 2) {
+                throw new AbangException("Please key in valid Event timings (missing '/to <end>')");
+            }
+            if (timing[0].trim().isEmpty() || timing[1].trim().isEmpty()) {
+                throw new AbangException("Please key in valid Event timings");
+            }
+
+            String start = timing[0].trim();
+            String end = timing[1].trim();
+
             Task task = new Event(name, start, end);
             return new AddCommand(task);
         }  else {
