@@ -37,24 +37,22 @@ public abstract class Task {
 
     }
 
+    /**
+     * Gets the Tag descriptiton
+     *
+     * @return Tag description
+     */
     public String getTag() {
         return this.tag;
     }
 
+    /**
+     * Tags task with description in argument
+     *
+     * @param tag
+     */
     public void tag(String tag) {
         this.tag = "#" + tag;
-    }
-
-    public boolean contain(String word) {
-        String[] words = taskDescription.split(" ");
-        boolean found = false;
-        for (String key : words) {
-            if (key.equals(word)) {
-                found = true;
-                break;
-            }
-        }
-        return found;
     }
 
     /**

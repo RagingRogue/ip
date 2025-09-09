@@ -66,6 +66,12 @@ public class TaskList {
         assert list.size() == before + 1 : "Size should increase by one after add";
     }
 
+    /**
+     * Tag a task with the corresponding index with its description
+     * @param index
+     * @param tagDescription
+     */
+
     public void tag(int index, String tagDescription) {
         this.list.get(index -1).tag(tagDescription);
     }
